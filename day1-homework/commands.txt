@@ -1,0 +1,7 @@
+Day 1 Homework Commands
+
+fastqc SRR072903.fastq
+hisat2 -p 8 -q -x ~/data/genomes/BDGP6 -U ~/qbb2017-answers/day1-homework/SRR072903.fastq -S BDGP6.sam
+samtools sort -@ 8 -o BDGP6.bam BDGP6.sam
+samtools index BDGP6.sorted.bam
+stringtie BDGP6.sorted.bam -p 8 -e -G ~/data/genomes/BDGP6.Ensembl.81.gtf -e -B -o BDGP6.ctab
