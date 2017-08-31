@@ -1,0 +1,100 @@
+#!/usr/bin/env python
+
+"""
+usage ./01-timecourse.py <samples.csv> <ctab_dir> <~/qbb2017/replicates.csv>
+-plot timecourse of FBtr0331261
+"""
+
+import sys
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+transcript = "FBtr0331261"
+
+#female
+
+df_samplesf = pd.read_csv(sys.argv[1])
+foi = df_samplesf["sex"] == "female"
+
+#male
+
+df_samplesm = pd.read_csv(sys.argv[1])
+moi = df_samplesm["sex"] == "male"
+
+#female replicates
+
+df_samplesfr = pd.read_csv(sys.argv[3])
+froi = df_samplesfr["sex"] == "female"
+
+#male replicates
+
+df_samplesmr = pd.read_csv(sys.argv[3])
+mroi = df_samplesmr["sex"] == "male"
+
+#regular
+
+fpkm_f = []
+fpkm_m = []
+
+#replicates
+
+fpkm_fr = []
+fpkm_mr = []
+
+#female
+
+for sample in df_samplesf["sample"][foi]:
+    f_fname = os.path.join(sys.argv[2], sample, "t_data.ctab")
+    df = pd.read_csv(f_fname, sep="\t")
+    foi = df["t_name"] == transcript
+    fpkm_f.append(df[foi]["FPKM"].values)
+
+#male
+
+for sample in df_samplesm["sample"][moi]:
+    m_fname = os.path.join(sys.argv[2], sample, "t_data.ctab")
+    df = pd.read_csv(m_fname, sep="\t")
+    moi = df["t_name"] == transcript
+    fpkm_m.append(df[moi]["FPKM"].values)
+    
+#female replicates
+    
+for sample in df_samplesfr["sample"][froi]:
+    fr_fname = os.path.join(sys.argv[2], sample, "t_data.ctab")
+    df = pd.read_csv(fr_fname, sep="\t")
+    froi = df["t_name"] == transcript
+    fpkm_fr.append(df[froi]["FPKM"].values)
+    
+#male replicates
+
+for sample in df_samplesmr["sample"][mroi]:
+    mr_fname = os.path.join(sys.argv[2], sample, "t_data.ctab")
+    df = pd.read_csv(mr_fname, sep="\t")
+    mroi = df["t_name"] == transcript
+    fpkm_mr.append(df[mroi]["FPKM"].values)
+
+
+plt.figure()
+line1 = plt.plot(fpkm_f, color="red", label="Female")
+
+line2 = plt.plot(fpkm_m, color="blue", label ="Male")
+
+line3 = plt.plot([4, 5, 6, 7], fpkm_fr, "o", color="red", label="Female Replicates")
+
+line4 = plt.plot([4, 5, 6, 7], fpkm_mr, "o", color="blue", label="Male Replicates")
+
+plt.ylabel("mRNA abundance (RPKM)")
+plt.xlabel("developmental stage")
+
+#plt.figlegend((line1, line2, line3, line4), ("females", "males", "female replicates", "male replicates"), "right")
+
+plt.xticks([0, 1 , 2, 3, 4, 5, 6, 7], ("10", "11", "12", "13", "14A", "14B", "14C", "14D"), rotation="vertical")
+
+plt.suptitle("$\it{Sxl}$", fontsize=20)
+
+plt.legend(loc="upper left")
+
+plt.savefig("day4-out.png")
+plt.close()
