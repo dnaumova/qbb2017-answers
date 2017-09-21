@@ -21,9 +21,11 @@ for i in data:
 
 plt.xlabel("Contigs")
 plt.ylabel("Position")
-plt.ylim((0,50000))
-plt.xlim((0,30000))
-plt.savefig("NP Lastz")
+plt.ylim((0,100000))
+plt.xlim((0,100000))
+#plt.savefig("NP Lastz")
 #plt.savefig("Spades Lastz")
 #plt.savefig("Velvet Lastz")
+plt.savefig("Spades Better")
+#plt.savefig("Velvet Better")
 

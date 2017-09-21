@@ -1,0 +1,10 @@
+velvet: num contigs = 305
+velvet: min contig length = 998
+velvet: max contig length = 61
+velvet: average contig length = 186.796721
+velvet: n50 = 248
+spades: num contigs = 128
+spades: min contig length = 1737
+spades: max contig length = 207
+spades: average contig length = 389.203125
+spades: n50 = 372
