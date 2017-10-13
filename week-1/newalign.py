@@ -13,7 +13,8 @@ for (nident, nseq), (pident, pseq) in itertools.izip(fasta.FASTAReader(nukes), f
     nukeprot.write(nident + "\n")
     for aa in pseq:
         if aa == "-":
-            nukeprot.write(nseq[:3])
+            nukeprot.write("---")
         else:
             nukeprot.write(nseq[:3])
             nseq = nseq[3:]
+        nukeprot.write("/n")

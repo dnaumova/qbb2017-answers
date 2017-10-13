@@ -8,7 +8,7 @@ readfly=fly.readlines()
 
 dromes={}
 
-ct = 0
+#ct = 0
 
 for item in readfly:
     if "DROME" in item:
@@ -18,9 +18,9 @@ for item in readfly:
         ac = column[2]
         flybase = column[3]
         dromes[str(flybase)] = str(ac)
-        ct += 1
-        if ct > 100:
-            break
+        #ct += 1
+        #if ct > 100:
+            #break
     else:
         continue
 

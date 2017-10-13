@@ -10,14 +10,19 @@ result=[]
 
 for line in lines:
     if line.startswith("SRR"):
-        result.append(line.split('\t')[4])
+        add = line.split('\t'[4])
+        result.append(float(add)
     else:
         continue
 
 f.close()
 
+stringy = ''.join(result)
+
+floater = float(stringy)
+
 #def mean(numbers):
    # return float(sum(numbers) / len(numbers))
 
-print float(sum(result)/len(result))
+print sum(result)/len(result)
 

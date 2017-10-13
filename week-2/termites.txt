@@ -19,6 +19,7 @@ sort -k 1 -n velvet_low_dot.out > velvet_low_dot_sorted.out
 
 time spades.py -1 reads_low_1.fastq -2 reads_low_2.fastq --nanopore MAP006.subset.fa -o ./spades_np
 
+quast ./velvet_low/contigs.fa ./velvet_high/contigs.fa ./spades_low/contigs.fasta ./spades_high/contigs.fasta -R reference.fasta
 
 ./02-plots.py np_low_dot_sorted.out
 
