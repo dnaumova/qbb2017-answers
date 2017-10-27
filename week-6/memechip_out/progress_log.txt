@@ -1,0 +1,34 @@
+Invoking:
+  getsize memechip_out/CTCF_motif.fa 1> $metrics
+Finished invoke:
+  name: count_seqs  status: 0  time: 0.026926
+Invoking:
+  fasta-most -min 50 < memechip_out/CTCF_motif.fa 1> $metrics
+Finished invoke:
+  name: most_seqs  status: 0  time: 0.069355
+Invoking:
+  fasta-center -dna -len 100 < memechip_out/CTCF_motif.fa 1> memechip_out/seqs-centered
+Finished invoke:
+  name: center_seqs  status: 0  time: 0.081236
+Invoking:
+  fasta-shuffle-letters memechip_out/seqs-centered memechip_out/seqs-shuffled -kmer 2 -tag -dinuc -dna -seed 1
+Finished invoke:
+  name: shuffle_seqs  status: 0  time: 0.016934
+Invoking:
+  fasta-subsample memechip_out/seqs-centered 600 -rest memechip_out/seqs-discarded -seed 1 1> memechip_out/seqs-sampled
+Finished invoke:
+  name: sample_seqs  status: 0  time: 0.074493
+Invoking:
+  fasta-get-markov -nostatus -nosummary -dna -m 1 memechip_out/CTCF_motif.fa memechip_out/background
+Finished invoke:
+  name: bg  status: 0  time: 0.013562
+Invoking:
+  meme memechip_out/seqs-sampled -oc memechip_out/meme_out -mod zoops -nmotifs 3 -minw 6 -maxw 30 -bfile memechip_out/background -dna -revcomp -nostatus
+Finished invoke:
+  name: meme  status: 0  time: 397.597889
+Invoking:
+  dreme -v 1 -oc memechip_out/dreme_out -png -dna -p memechip_out/seqs-centered -n memechip_out/seqs-shuffled
+Finished invoke:
+  name: dreme  status: 0  time: 84.973712
+Invoking:
+  centrimo -seqlen 148 -verbosity 1 -oc memechip_out/centrimo_out -bfile memechip_out/background memechip_out/CTCF_motif.fa memechip_out/meme_out/meme.xml memechip_out/dreme_out/dreme.xml memes/

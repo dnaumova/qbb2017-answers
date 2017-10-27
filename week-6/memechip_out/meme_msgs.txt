@@ -1,0 +1,8 @@
+Duplicate sequence name. Skipping 'chr19:55909018-55909118'.
+Duplicate sequence name. Skipping 'chr19:17364817-17364917'.
+Warning: Can not convert EPS file to PNG as no install of Image Magick or Ghostscript is usable.
+Warning: Can not convert EPS file to PNG as no install of Image Magick or Ghostscript is usable.
+Warning: Can not convert EPS file to PNG as no install of Image Magick or Ghostscript is usable.
+Warning: Can not convert EPS file to PNG as no install of Image Magick or Ghostscript is usable.
+Warning: Can not convert EPS file to PNG as no install of Image Magick or Ghostscript is usable.
+Warning: Can not convert EPS file to PNG as no install of Image Magick or Ghostscript is usable.
