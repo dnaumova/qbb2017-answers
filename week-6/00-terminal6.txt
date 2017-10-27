@@ -1,0 +1,29 @@
+tar -xzf g1e.tar.xz
+
+bowtie2-build -f chr19.fa mm10bt2
+
+brew install cpanminus; cpanm install XML::Simple
+
+bowtie2 -x mm10bt2 input_ER4.fastq -S input_ER4.sam
+
+bowtie2 -x mm10bt2 input_G1E.fastq -S input_G1E.sam
+
+bowtie2 -x mm10bt2 CTCF_G1E.fastq -S CTCF_G1E.sam
+
+bowtie2 -x mm10bt2 CTCF_ER4.fastq -S CTCF_ER4.sam
+
+macs2 callpeak -t CTCF_ER4.sam -c input_ER4.sam -g 61431566 -n ER4
+
+macs2 callpeak -t CTCF_G1E.sam -c input_G1E.sam -g 61431566 -n G1E
+
+bedtools intersect -a ER4_peaks.narrowPeak -b G1E_peaks.narrowPeak -v > diff_plus.bed
+
+bedtools intersect -a G1E_peaks.narrowPeak -b ER4_peaks.narrowPeak -v > diff_minus.bed
+
+bedtools getfasta -fi chr19.fa -bed ER4_peaks.narrowPeak > ER4.fa
+
+bedtools getfasta -fi chr19.fa -bed G1E_peaks.narrowPeak > G1E.fa
+
+cat G1E.fa ER4.fa > CTCF_motif.fa
+
+brew install openmpi --build-from-source --cc=gcc-6
